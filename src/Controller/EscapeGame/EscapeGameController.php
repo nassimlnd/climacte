@@ -17,4 +17,11 @@ class EscapeGameController extends AbstractController
         return $this->render('EscapeGame/Start.html.twig');
     }
 
+    #[Route('/', name: 'app_start')]
+    public function index(): Response
+    {
+        return $this->render('EscapeGame/Start.html.twig');
+    }
+
+
 }
