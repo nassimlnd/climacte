@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %} {%
+    block body %}
+    <h1>Escape Game</h1>
+
+    <br />
+    {% if tapis is defined  %}
+    Une cabane à outils normale mais le tapis à l'air bizarre
+    <br />
+    <br />
+    //Mettre un timer en haut à droite 5:00
+    //
+    <br />
+    <a href="{{ path("app_jardin") }}">Sortir</a><br />
+
+         <a href="{{ path("app_cabane_interieur", {'tapis': true}) }}">Examiner le tapis</a><br />
+    {% else %}
+
+
+    <a href="{{ path("app_cabane_interieur", {'tapis': true}) }}">Examiner le tapis</a><br />
+    {% endif %}
+
+{% endblock %}

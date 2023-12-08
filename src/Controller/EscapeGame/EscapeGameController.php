@@ -3,6 +3,7 @@
 namespace App\Controller\EscapeGame;
 
 
+use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,5 +47,21 @@ class EscapeGameController extends AbstractController
     {
         return $this->render('EscapeGame/Cabane.html.twig');
     }
+
+
+    #[Route('/cabane_intérieur', name: 'app_cabane_interieur', methods: ['GET', 'POST'])]
+    public function cabaneIntérieur(Request $request): Response
+    {
+        if($request->isMethod('POST')){
+            return $this->render('EscapeGame/CabaneInterieur.html.twig',[
+                'tapis' => true,
+            ]);
+        }
+
+
+            return $this->render('EscapeGame/CabaneInterieur.html.twig');
+        //
+    }
+
 
 }
