@@ -3,79 +3,43 @@
 {% block title %}Hello QuizController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="bg-red-600 w-2/4 ml-4">
+        <form>
+            {% for question in data %}
+                <div id="question-{{ question.id }}" class="hidden">
+                    <h3>Question {{ question.id }} : {{ question.title }}</h3>
+                    {% for key, value in question.responses %}
+                        <label>
+                            <input class="responses-{{ question.id }}" type="radio" name="q1" value="{{ key }}"> {{ value }}
+                        </label>
+                    {% endfor %}
+                    <button type="button" onclick="onValid({{ question.id }})">Soumettre</button>
+                </div>
+            {% endfor %}
+        </form>
+    </div>
+    {% block javascripts %}
+        <script type="text/javascript">
+            window.addEventListener('load', (event) => {
+                document.getElementById('question-1').classList.remove('hidden');
+            });
 
-<div class="bg-red-600">
-    <form>
-        <h3>Question 1: Quel gaz est principalement responsable du réchauffement climatique ?</h3>
-        <label>
-            <input type="radio" name="q1" value="a"> Oxygène
-        </label>
-        <label>
-            <input type="radio" name="q1" value="b"> Dioxyde de carbone (CO2)
-        </label>
-        <label>
-            <input type="radio" name="q1" value="c"> Azote
-        </label>
-        <label>
-            <input type="radio" name="q1" value="d"> Methane (CH4)
-        </label>
+            const data = {{ data | json_encode | raw}};
 
-        <h3>Question 2: Quelle est la principale source d'émissions de dioxyde de carbone ?</h3>
-        <label>
-            <input type="radio" name="q2" value="a"> Utilisation de l'électricité
-        </label>
-        <label>
-            <input type="radio" name="q2" value="b"> Transport routier
-        </label>
-        <label>
-            <input type="radio" name="q2" value="c"> Déforestation
-        </label>
-        <label>
-            <input type="radio" name="q2" value="d"> Industrie
-        </label>
+            function onValid(id) {
+                let responses = document.querySelectorAll('.responses-' + id);
+                for (response of responses) {
+                    if (response.checked == true) {
+                        if (data['question'+id].rightAnswer == response.value) {
 
-        <h3>Question 3: Quelle est une solution efficace pour réduire l'empreinte carbone liée à l'alimentation ?</h3>
-        <label>
-            <input type="radio" name="q3" value="a"> Manger plus de viande rouge
-        </label>
-        <label>
-            <input type="radio" name="q3" value="b"> Privilégier les produits locaux et de saison
-        </label>
-        <label>
-            <input type="radio" name="q3" value="c"> Ignorer les labels bio
-        </label>
-        <label>
-            <input type="radio" name="q3" value="d"> Utiliser des emballages plastiques
-        </label>
+                        }
+                    }
+                }
+            }
 
-        <h3>Question 4: Quelle est une source d'énergie renouvelable ?</h3>
-        <label>
-            <input type="radio" name="q4" value="a"> Charbon
-        </label>
-        <label>
-            <input type="radio" name="q4" value="b"> Pétrole
-        </label>
-        <label>
-            <input type="radio" name="q4" value="c"> Éolienne
-        </label>
-        <label>
-            <input type="radio" name="q4" value="d"> Gaz naturel
-        </label>
+            function isCorrect(id) {
+            }
+        </script>
+    {% endblock %}
 
-        <br>
-        <button type="button" onclick="submitForm()">Soumettre</button>
-    </form>
-
-    <script>
-        function submitForm() {
-            // Vous pouvez ajouter ici le code pour traiter les réponses du formulaire
-            alert("Formulaire soumis !");
-        }
-    </script>
-
-</div>
 {% endblock %}
