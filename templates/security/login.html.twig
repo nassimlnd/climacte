@@ -1,0 +1,89 @@
+{% extends '_layouts/auth.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="container flex h-screen w-screen flex-col items-center justify-center bg-black">
+        <a href="/" class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background hover:bg-#8A2BE2 hover:text-#CCCCCC h-10 py-2 px-4 absolute left-4 top-4 md:left-8 md:top-8">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A2BE2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Back
+        </a>
+        <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div class="flex flex-col space-y-2 text-center">
+                <h1 class="text-2xl font-semibold tracking-tight text-#8A2BE2">
+                    Bienvenue
+                </h1>
+                <p class="text-sm text-#CCCCCC">
+                    Entrez vos identifiants pour vous connecter
+                </p>
+            </div>
+            <div class="grid gap-6">
+                <form method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </form>
+                    <div class="grid gap-2">
+                        <div class="grid gap-1">
+                            <label for="email" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-#8A2BE2">
+                                Email
+                            </label>
+                            <input
+                                    id="email"
+                                    name="email"
+                                    required
+                                    autofocus
+                                    placeholder="name@example.com"
+                                    type="email"
+                                    autoCapitalize="none"
+                                    autoComplete="email"
+                                    class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            />
+                            {% if error %}
+                                <p class="px-1 text-xs text-red-600">
+                                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                                </p>
+                            {% endif %}
+                        </div>
+                        <div class="grid gap-1">
+                            <label for="password" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-#8A2BE2">
+                                Password
+                            </label>
+                            <input
+                                    id="password"
+                                    name="password"
+                                    required
+                                    placeholder="********"
+                                    type="password"
+                                    autoCapitalize="none"
+                                    autoComplete="password"
+                                    class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            />
+                            {% if error %}
+                                <p class="px-1 text-xs text-red-600">
+                                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                                </p>
+                            {% endif %}
+                        </div>
+                        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4">
+                            Se Connecter
+                        </button>
+                    </div>
+                </form>
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <span class="w-full border-t"></span>
+                    </div>
+                    <div class="relative flex justify-center text-xs uppercase">
+                    <span class="bg-background px-2 text-muted-foreground">
+                        Ou continuez avec
+                    </span>
+                    </div>
+                </div>
+            </div>
+            <p class="px-8 text-center text-sm text-#CCCCCC">
+                <a href="/register" class="hover:text-brand underline underline-offset-4">
+                    Vous n'avez pas de compte ? Créer un compte
+                </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
