@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello QuizController!{% endblock %}
+
+{% block body %}
+    <div class="bg-red-600 w-2/4 ml-4">
+        <form>
+            {% for question in data %}
+                <div id="question-{{ question.id }}" class="hidden">
+                    <h3>Question {{ question.id }} : {{ question.title }}</h3>
+                    {% for key, value in question.responses %}
+                        <label>
+                            <input class="responses-{{ question.id }}" type="radio" name="q1" value="{{ key }}"> {{ value }}
+                        </label>
+                    {% endfor %}
+                    <button type="button" onclick="onValid({{ question.id }})">Soumettre</button>
+                </div>
+            {% endfor %}
+        </form>
+    </div>
+    {% block javascripts %}
+        <script type="text/javascript">
+            window.addEventListener('load', (event) => {
+                document.getElementById('question-1').classList.remove('hidden');
+            });
+
+            const data = {{ data | json_encode | raw}};
+
+            function onValid(id) {
+                let responses = document.querySelectorAll('.responses-' + id);
+                for (response of responses) {
+                    if (response.checked == true) {
+                        if (data['question'+id].rightAnswer == response.value) {
+
+                        }
+                    }
+                }
+            }
+
+            function isCorrect(id) {
+            }
+        </script>
+    {% endblock %}
+
+{% endblock %}

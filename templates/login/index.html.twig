@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion - ClimActe{% endblock %}
+
+{% block body %}
+    <div class="flex h-screen w-3/4 relative mx-auto items-center">
+        <div class="w-1/2 h-full flex flex-col items-end justify-center ">
+            <form action="{{ path('app_login') }}" method="post">
+                <div class="w-fit mx-auto">
+                    <div class="w-full mb-14">
+                        <h1 class="text-3xl font-medium">Connexion</h1>
+                    </div>
+                    <input type="text" placeholder="Username" id="username" name="_username"
+                           class="mt-4 block bg-slate-800 rounded text-white placeholder-slate-500 px-6 py-2.5 w-[400px]">
+                    <input type="password" placeholder="Mot de passe" id="password" name="_password"
+                           class="mt-4 block bg-slate-800 rounded text-white placeholder-slate-500 px-6 py-2.5 w-[400px]">
+                    <p>Pas encore inscrit ? <a href="{{ path('app_register') }}" class="text-blue-600">Inscrivez-vous ici</a></p>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <div class="w-full mt-14">
+                        <button type="submit"
+                                class="w-fit bg-slate-900 h-fit flex items-center border border-slate-600 rounded px-6 py-2.5">
+                            Se connecter
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="absolute top-0 -right-48 -z-20 h-screen overflow-y-hidden overflow-x-hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1250" height="1073" viewBox="0 0 1250 1073" fill="none">
+            <g filter="url(#filter0_f_503_96)">
+                <path d="M668 501C668 612.009 578.009 702 467 702C355.991 702 266 612.009 266 501C266 389.991 355.991 300 467 300C578.009 300 668 389.991 668 501Z"
+                      fill="#7C3AED"></path>
+                <path d="M965 418C965 529.009 875.009 619 764 619C652.991 619 563 529.009 563 418C563 306.991 652.991 217 764 217C875.009 217 965 306.991 965 418Z"
+                      fill="#2563EB"></path>
+                <path d="M984 606C984 717.009 894.009 807 783 807C671.991 807 582 717.009 582 606C582 494.991 671.991 405 783 405C894.009 405 984 494.991 984 606Z"
+                      fill="#7C3AED"></path>
+            </g>
+            <defs>
+                <filter id="filter0_f_503_96" x="0.600006" y="-48.4" width="1248.8" height="1120.8"
+                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+                    <feGaussianBlur stdDeviation="132.7" result="effect1_foregroundBlur_503_96"></feGaussianBlur>
+                </filter>
+            </defs>
+        </svg>
+    </div>
+{% endblock %}
